@@ -1,5 +1,6 @@
 #!/bin/sh
 
+[ -e "/etc/config/ucitrack" ] && {
 uci -q batch <<-EOF >/dev/null
 	delete firewall.timecontrol
 	set firewall.timecontrol=include
@@ -8,7 +9,6 @@ uci -q batch <<-EOF >/dev/null
 	set firewall.timecontrol.reload=1
 EOF
 
-[ -e "/etc/config/ucitrack" ] && {
 uci -q batch <<-EOF >/dev/null
 	delete ucitrack.@timecontrol[-1]
 	add ucitrack timecontrol
